@@ -8,5 +8,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 COPY . .
 
-EXPOSE 8080
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers" "1", "--timeout-keep-alive" "0" ]
+ENV PORT 8080
+
+CMD exec uvicorn main:app --host 0.0.0.0 --port ${PORT}
