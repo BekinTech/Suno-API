@@ -44,9 +44,14 @@ doc_ref = db.collection("ifai").document("SunoAI")
 doc = doc_ref.get()
 doc_data = doc.to_dict()
 
+sess=doc_data.get('SESSION_ID')
+cokk=doc_data.get('COOKIE')
+printf(sess)
+printf(cokk)
+
 suno_auth = SunoCookie()
-suno_auth.set_session_id(doc_data.get('SESSION_ID'))
-suno_auth.load_cookie(doc_data.get('COOKIE'))
+suno_auth.set_session_id(sess)
+suno_auth.load_cookie(cokk)
 
 
 def update_token(suno_cookie: SunoCookie):
