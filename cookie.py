@@ -6,6 +6,9 @@ from http.cookies import SimpleCookie
 from threading import Thread
 
 import requests
+import firebase_admin
+from firebase_admin import firestore
+
 
 from utils import COMMON_HEADERS
 
@@ -35,9 +38,15 @@ class SunoCookie:
         self.token = token
 
 
+app = firebase_admin.initialize_app()
+db = firestore.client()
+doc_ref = db.collection("ifai").document("SunoAI")
+doc = doc_ref.get()
+doc_data = doc.to_dict()
+
 suno_auth = SunoCookie()
-suno_auth.set_session_id(os.getenv("SESSION_ID"))
-suno_auth.load_cookie(os.getenv("COOKIE"))
+suno_auth.set_session_id(doc_data.get('SESSION_ID'))
+suno_auth.load_cookie(doc_data.get('COOKIE'))
 
 
 def update_token(suno_cookie: SunoCookie):
