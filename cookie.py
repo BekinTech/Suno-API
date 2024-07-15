@@ -46,8 +46,8 @@ doc_data = doc.to_dict()
 
 sess=doc_data.get('SESSION_ID')
 cokk=doc_data.get('COOKIE')
-printf(sess)
-printf(cokk)
+print(sess)
+print(cokk)
 
 suno_auth = SunoCookie()
 suno_auth.set_session_id(sess)
